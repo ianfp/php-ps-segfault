@@ -70,57 +70,11 @@ class PostscriptDocument
     protected function beginPage()
     {
         ps_begin_page($this->psLabel, $this->getPageWidth(), $this->getPageHeight());
-        $this->setCoordinateOrientation();
-    }
-
-    protected function inchToPoint($inches)
-    {
-        return (int) round($inches * 72);
-    }
-
-    protected function setCoordinateOrientation()
-    {
-        /* override */
     }
 
     protected function setTextPosition($x, $y)
     {
         ps_set_text_pos($this->psLabel, $x, $y);
-    }
-
-    protected function writeText($text)
-    {
-        try {
-            ps_show($this->psLabel, utf8ToAscii($text));
-        } catch (\ErrorException $ex) {
-            $this->handlePsException($ex);
-        }
-    }
-
-    protected function handlePsException(\ErrorException $ex)
-    {
-        /* Really, who cares about missing ligatures? */
-        if (stripos($ex->getMessage(), 'ligature') === false) {
-            throw $ex;
-        }
-    }
-
-    protected function continueText($text)
-    {
-        try {
-            ps_continue_text($this->psLabel, utf8ToAscii($text));
-        } catch (\ErrorException $ex) {
-            $this->handlePsException($ex);
-        }
-    }
-
-    protected function setPsFont(PostscriptFont $font)
-    {
-        $fontId = ps_findfont($this->psLabel, $font->getPathWithoutExtension(), null, 1);
-        if (!$fontId) throw new \InvalidArgumentException(sprintf(
-            "Unable to load font '%s'", $font->getName()
-        ));
-        ps_setfont($this->psLabel, $fontId, $font->getSize());
     }
 
     protected function endPage()
