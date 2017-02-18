@@ -1,5 +1,5 @@
 {
-    "name": "php-ps-test",
+    "name": "ianfp/php-ps-segfault",
     "autoload": {
         "psr-4": {
             "PhpPsTest\\": "src/"
