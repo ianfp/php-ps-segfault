@@ -3,7 +3,9 @@
 namespace PhpPsTest;
 
 
-class PostscriptDocumentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class PostscriptDocumentTest extends TestCase
 {
     public function testRender()
     {
