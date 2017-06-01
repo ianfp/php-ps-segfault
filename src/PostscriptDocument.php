@@ -60,7 +60,7 @@ class PostscriptDocument
     {
         ps_close($this->psLabel);
         $psdata = file_get_contents($this->tempFilename);
-        ps_delete($this->psLabel);
+        ps_delete($this->psLabel); // commenting this line out solves the problem!
         $this->psLabel = null;
         unlink($this->tempFilename);
         $this->tempFilename = null;
